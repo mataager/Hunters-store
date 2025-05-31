@@ -1,0 +1,1045 @@
+<!-- cart -->
+
+<head>
+    <meta charset="UTF-8">
+    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="store-title"></title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&amp;family=Roboto:wght@400;500;700&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/inithializer.js"></script>
+    <script src="./assets/js/check-auth-user.js"></script>
+    <script src="./assets/js/static.js"></script>
+    <script src="./assets/js/all.js"></script>
+    <script src="./assets/js/search-product.js"></script>
+    <script src="./assets/js/Check-available.js"></script>
+    <script src="./assets/js/updateshippingfees.js"></script>
+    <script src="./assets/js/getdate.js"></script>
+    <style>
+        .swal2-actions {
+            flex-direction: column !important;
+        }
+
+        .swal2-deny {
+            padding-inline: 60px;
+            padding-block: 15px;
+            border: 1px solid #19191a;
+            border-radius: .25em;
+            background-color: #f0f0f0e0;
+            color: #19191a;
+            font-size: 1em;
+        }
+
+        /*  */
+        /* body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        body.modal-open::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.01);
+            z-index: 999;
+        }  */
+    </style>
+
+
+
+</head>
+<header class="header" data-header="">
+    <div class="header__bar" id="store-hints"></div>
+    <div class="container">
+
+        <div class="overlay" data-overlay=""></div>
+
+        <a href="./index.html" class="logo">
+            <img src="./assets/images/iicon.svg" width="160" height="50" alt="">
+        </a>
+
+        <button class="nav-open-btn" data-nav-open-btn="" aria-label="Open Menu">
+            <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>
+        </button>
+
+        <nav class="navbar" data-navbar="">
+
+            <button class="nav-close-btn black-font" data-nav-close-btn="" aria-label="Close Menu">
+                <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
+            </button>
+
+            <a href="#" class="logo bg-white">
+                <img src="./assets/images/iicon.svg" width="190" height="50" alt="">
+            </a>
+
+            <ul class="navbar-list">
+
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" onclick="changeFrameSrc('index.html')">Home</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" onclick="changeFrameSrc('Products.html')">Products</a>
+                </li>
+
+                <!-- /mega menus & brands menu/ -->
+
+                <li class="navbar-item" id="megamenu" data-mega-menu>
+                    <div class="flex align-items justify-content-space-between">
+                        <a href="#" class="navbar-link" onclick="changeFrameSrc('Products.html')">Products</a>
+                        <a id="open-category" class="rotate open-category open-category-btn">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
+                    <div class="mega-menu flex-direction-column" id="mega-menu">
+                        <!-- Products content will go here -->
+                    </div>
+                </li>
+
+                <li class="navbar-item" id="brandsmenu" data-mega-menu>
+                    <div class="flex align-items justify-content-space-between">
+                        <a href="#" class="navbar-link" onclick="changeFrameSrc('Products.html')">Brands</a>
+                        <a id="open-brands" class="rotate open-category open-category-btn">
+                            <i class="bi bi-plus"></i>
+                        </a>
+                    </div>
+                    <div class="mega-menu flex-direction-column" id="brands-mega-menu">
+                        <!-- Brands content will go here -->
+                    </div>
+                </li>
+
+                <!--  -->
+
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link red-txt" onclick="changeFrameSrc('sale.html')">Sale</a>
+                </li>
+
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link" onclick="changeFrameSrc('Contact.html')">Contact</a>
+                </li>
+            </ul>
+            <ul class="nav-action-list">
+
+                <li class="li-action" id="search-li">
+
+
+                </li>
+                <li class="navbar-item li-action">
+                    <button class="nav-action-btn" onclick="changeFrameSrc('Cart.html')">
+                        <ion-icon name="bag-outline" aria-hidden="true" role="img" class="md hydrated"></ion-icon>
+                        <data class="nav-action-text">Basket: <strong class="cart-amount" id="cart-amount">0
+                                E£</strong></data>
+                        <data id="cartItemCount" class="nav-action-badge" aria-hidden="true">0</data>
+                    </button>
+                </li>
+                <li class="navbar-item li-action">
+                    <button class="nav-action-btn" onclick="changeFrameSrc('account.html')">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <span class="nav-action-text">Account</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-action-btn hidden">
+                        <ion-icon name="heart-outline" aria-hidden="true" role="img" class="md hydrated"></ion-icon>
+
+                        <span class="nav-action-text">Wishlist</span>
+
+                        <data class="nav-action-badge" value="5" aria-hidden="true">5</data>
+                    </button>
+                </li>
+            </ul>
+
+        </nav>
+
+    </div>
+</header>
+<main>
+    <div class="preloader" id="preloader">
+
+        <div class="loader"></div>
+    </div>
+
+    <div class="product-area" id="product-area">
+        <section class="section product p-0 mt-10">
+            <div id="cart-card">
+                <div class="flex center flex-direction-column flex-start m-10" id="Cart">
+                    <div class="m-10 flex space-evenly align-items relative">
+                        <div class="relative">
+                            <p class="mycarttitle relative">My Cart
+                        </div>
+
+                        </p>
+                        <div class="flex flex-direction-column align-items-flex-end gap-5">
+                            <button id="" class="cart-continueshopping-btn"
+                                onclick="changeFrameSrc('./Products.html')"><i class="bi bi-arrow-left"></i> Contniue
+                                Shopping</button>
+                            <button class="ShippingReturnbtn" onclick="openPolicyModal()"><i
+                                    class="bi bi-info-circle"></i> Shipping & Return
+                                Policy</button>
+                        </div>
+
+                    </div>
+
+                    <div class="m-10 cart-bg flex-direction-column flex" id="cartarea">
+                        <div class="flex center">
+                            <div class="over-flow-auto mt-20">
+                                <div>
+                                    <div class="free-shipping-widget" id="freeShippingWidget">
+                                        <div class="shipping-progress">
+                                            <div class="progress-fill-freeshipping"></div>
+                                        </div>
+                                        <div class="shipping-message">
+                                            <span class="remaining">Shop ABOVE<span id="remainingAmount">0.00 EGP</span>
+                                                for GETTING
+                                                shipping</span>
+                                            <span class="success">You've earned free shipping! </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="m-10 cart-bg flex-direction-column flex" id="cartarea">
+                                    <div class="flex center">
+                                        <div class="over-flow-auto mt-20">
+                                            <div class="cartItems-sec">
+                                                <div>
+                                                    <div class="mt-20 address-area ">
+                                                        <div class="relative">
+                                                            <p class="flex flex-start mb-10 cart-area-divs-titels">Cart
+                                                                Items</p>
+                                                            <p class="cartitemsamount" id="cartitemsamount">0</p>
+                                                        </div>
+
+                                                        <div class="" style="height: auto;">
+                                                            <div class="preloader2 hidden" id="cart-items-preloader">
+                                                                <div class="loader2"></div>
+                                                            </div>
+                                                            <ul class="m-10-0-20-0" id="cart-items">
+                                                            </ul>
+
+                                                        </div>
+                                                        <div class="h-5"></div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="address-sec">
+                                    <div>
+                                        <div class="mt-20 address-area">
+                                            <div class="flex align-items justify-content-space-between mr-20">
+                                                <p class="flex flex-start mb-10 cart-area-divs-titels">Address</p>
+                                                <i class="bi bi-caret-right address-area-i"
+                                                    onclick="showandhideaddress()"></i>
+                                            </div>
+
+                                            <div class="address-area-scroller">
+
+
+                                                <div class="preloader2" id="preloader2">
+                                                    <div class="loader2"></div>
+                                                </div>
+                                                <div class="address-area-div" id="address-area"></div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div> -->
+
+                                            <div class="address-sec" id="address-sec">
+                                                <div>
+                                                    <div class="mt-20 address-area">
+                                                        <div
+                                                            class="flex align-items justify-content-space-between mr-20 address-header">
+                                                            <p class="flex flex-start mb-20 cart-area-divs-titels">
+                                                                Address</p>
+                                                            <i class="bi bi-caret-right address-toggle-icon"
+                                                                onclick="showandhideaddress()"></i>
+                                                        </div>
+
+                                                        <div class="address-area-scroller" id="addressdiv">
+                                                            <div class="preloader2" id="preloader2">
+                                                                <div class="loader2"></div>
+                                                            </div>
+                                                            <div class="address-area-div" id="address-area"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <style>
+
+
+                                            </style>
+
+                                            <script>
+                                                function showandhideaddress() {
+                                                    const scroller = document.getElementById('addressdiv');
+                                                    const icon = document.querySelector('.address-toggle-icon');
+
+                                                    // Toggle the 'show' class
+                                                    scroller.classList.toggle('show');
+
+                                                    // Toggle the icon rotation
+                                                    icon.classList.toggle('rotated');
+
+                                                    // If we're showing the scroller, we might want to load content
+                                                    if (scroller.classList.contains('show')) {
+                                                        // Here you could add logic to load address content if needed
+                                                        // For example:
+                                                        // loadAddressContent();
+                                                    }
+                                                }
+                                                function showandhidepayment() {
+                                                    const scroller = document.getElementById('paymentdiv');
+                                                    const icon = document.querySelector('.Payment-toggle-icon');
+
+                                                    // Toggle the 'show' class
+                                                    scroller.classList.toggle('show');
+
+                                                    // Toggle the icon rotation
+                                                    icon.classList.toggle('rotated');
+
+                                                    // If we're showing the scroller, we might want to load content
+                                                    if (scroller.classList.contains('show')) {
+                                                        // Here you could add logic to load address content if needed
+                                                        // For example:
+                                                        // loadAddressContent();
+                                                    }
+                                                }
+
+                                            </script>
+
+
+                                            <div class="flex center total-cart-div mt-20">
+                                                <div class="promo-code-section">
+                                                    <div class="flex align-items justify-content-space-between mr-20">
+                                                        <p class="flex flex-start mb-20 cart-area-divs-titels">Payment
+                                                            Options</p>
+                                                        <i class="bi bi-caret-right Payment-toggle-icon"
+                                                            onclick="showandhidepayment()"></i>
+                                                    </div>
+
+                                                    <!-- <div class="paymentdiv" id="paymentdiv">
+                                            <div class="flex center align-items payment-options-sec-div mb-10">
+                                                <button id="" class="paymentmeth-btn">Cash on Delivery</button>
+                                                <button id="" class="paymentmeth-btn ">Pay By Visa Card</button>
+                                                <button id="" class="paymentmeth-btn ">Pay By mobile wallet</button>
+                                                <button id="" class="paymentmeth-btn ">Pay By Value</button>
+                                            </div>
+                                        </div> -->
+                                                    <div class="paymentdiv" id="paymentdiv">
+                                                        <div
+                                                            class="flex center align-items payment-options-sec-div mb-10">
+                                                            <button id=""
+                                                                class="paymentmeth-btn paymentmeth-btn-selected">Cash on
+                                                                Delivery</button>
+                                                            <button id="" class="paymentmeth-btn disabled" disabled
+                                                                title="Currently unavailable">Pay By Visa Card</button>
+                                                            <button id="" class="paymentmeth-btn disabled" disabled
+                                                                title="Currently unavailable">Pay By mobile
+                                                                wallet</button>
+                                                            <button id="" class="paymentmeth-btn disabled" disabled
+                                                                title="Currently unavailable">Pay By Value</button>
+                                                        </div>
+                                                        <p class="payment-note mb-20">Note: Currently only Cash on
+                                                            Delivery is
+                                                            available
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="flex center total-cart-div mt-20">
+                                                <div class="promo-code-section pb-30">
+                                                    <p class="mb-10 cart-area-divs-titels">Promo Code</p>
+                                                    <div class="flex center align-items promo-code-section-div">
+                                                        <input type="text" id="promo-code" class="promo-code-input"
+                                                            placeholder="Enter promo code">
+                                                        <div class="promo-code-btn-message-area">
+                                                            <button id="apply-promo" class="apply-promo-btn ml-10"
+                                                                onclick="applyPromoCode()">Apply</button>
+                                                            <div id="promo-message" class="promo-message mt-10"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="flex center total-cart-div mt-20" id="cart-section-all">
+                                                <div class="flex center Cart-summary-section">
+                                                    <p class="mb-10 cart-area-divs-titels">Cart Summary</p>
+                                                    <div
+                                                        class="flex flex-start flex-direction-column align-items-flex-start p-30">
+                                                        <div
+                                                            class="flex center align-items font-small mb-10 cart-data-area">
+                                                            <h5>Cart Total :</h5><span id="cart-total"
+                                                                class="ml-3"></span>
+                                                        </div>
+                                                        <div class="flex center align-items font-small mb-10 cart-data-area"
+                                                            id="shipping-fees-total-area">
+                                                            <h5>Shipping Fees :</h5><span id="shipping-fees-total"
+                                                                class="ml-3"></span>
+                                                            <span id="shipping-fees" class="ml-3 hidden"></span>
+                                                        </div>
+
+                                                        <div
+                                                            class="flex center align-items font-small mb-10 cart-data-area">
+                                                            <h5>Total Price :</h5><span id="total-price"
+                                                                class="ml-3"></span>
+                                                        </div>
+                                                        <h5 class="hidden" id="total-cart-amount"></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="flex center m-30" id="checkoutByAccount"><button id="Submit"
+                                            class="Add-to-Cart" onclick="submitOrder()">proceed to checkout
+                                            <i class="bi bi-check2-all"></i>
+                                        </button></div>
+                                    <div class="flex center m-30 hidden" id="checkoutWithoutAccount"></div>
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                                const cartList = document.getElementById("cart-items");
+                                const cartArea = document.getElementById("cartarea");
+                                let totalAmount = 0;
+                                function updatecartitemscount() {
+                                    let cartitemscount = cart.reduce((total, item) => total + item.quantity, 0);
+                                    document.getElementById("cartitemsamount").innerText = cartitemscount;
+                                }
+                                updatecartitemscount();
+
+                                // Function to check availability from Firebase database
+                                function checkAvailability(itemId, productSize, productColor, requestedQuantity, callback) {
+                                    const preloader = document.getElementById("cart-items-preloader");
+                                    // Fetch the product data from Firebase database
+                                    fetch(`${url}/Stores/${uid}/Products/${itemId}.json`)
+                                        .then(response => response.json())
+                                        .then(productsData => {
+                                            let itemFound = false;
+                                            let availableQty = 0;
+
+                                            // Loop through the product data to find the correct item
+                                            for (const key in productsData.sizes) {
+                                                if (key === productSize) {
+                                                    const sizeData = productsData.sizes[key];
+                                                    if (sizeData[productColor]) {
+                                                        const colorData = sizeData[productColor];
+                                                        availableQty = parseInt(colorData.qty, 10); // Get the available quantity
+                                                        const colorImage = colorData.img1 || productsData["product-photo"]; // Use color image or fallback to main product photo
+
+                                                        itemFound = true;
+
+                                                        // Check if the requested quantity is available
+                                                        if (requestedQuantity <= availableQty && requestedQuantity > 0) {
+                                                            callback(true, availableQty); // Proceed if available
+                                                        } else {
+                                                            // Insufficient stock, update to the available quantity in local storage
+                                                            Swal.fire({
+                                                                icon: "warning",
+                                                                html: `<div style="display: flex; align-items: center; gap: 10px;flex-direction: column;">
+                                                    <img src="${colorImage}" alt="${productsData["product-title"]}" 
+                                                        style="width: 200px;object-fit: cover; border-radius: 5px;" />
+                                                    <span>Only ${availableQty} items available of this product</span>
+                                                  </div>`,
+                                                            }).then(() => {
+                                                                // Update the cart locally to the available quantity
+                                                                updateLocalDbItemQuantity(itemId, availableQty);
+                                                                preloader.classList.add("hidden");
+
+                                                            });
+
+                                                            callback(false, availableQty); // Insufficient stock, update local DB
+                                                        }
+
+                                                        break;
+                                                    }
+                                                }
+                                            }
+
+                                            if (!itemFound) {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Item Not Found",
+                                                    text: "This item is no longer available.",
+                                                });
+                                                callback(false, availableQty); // Item not found
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error("Error checking availability:", error);
+                                            Swal.fire({
+                                                icon: "error",
+                                                title: "Error",
+                                                text: "There was an error checking availability. Please try again later.",
+                                            });
+                                            callback(false, 0); // Error
+                                        });
+                                }
+
+                                function checkAndUpdateQuantities() {
+                                    cart.forEach((item) => {
+                                        checkAvailability(item.id, item.productSize, item.productColor, item.quantity, (isAvailable, availableQty) => {
+                                            if (!isAvailable) {
+                                                // If not available, update the local storage item quantity
+                                                updateLocalDbItemQuantity(item.id, availableQty);
+                                            }
+                                        });
+                                    });
+                                }
+                                // // Function to update quantity in the cart
+                                // function updateQuantity(index, increment) {
+                                //     const item = cart[index];
+                                //     const requestedQuantity = item.quantity + increment;
+                                //     const preloader = document.getElementById("cart-items-preloader");
+                                //     const cartItems = document.getElementById("cart-items");
+
+                                //     // Visual feedback - dim cart items and show loader
+                                //     if (cartItems) cartItems.classList.add("updating");
+                                //     if (preloader) {
+                                //         preloader.classList.remove("hidden");
+                                //     }
+
+
+                                //     // Ensure the requested quantity is never less than 1
+                                //     if (requestedQuantity < 1) {
+                                //         preloader.classList.add("hidden");
+                                //         return; // Prevent decrement below 1
+                                //     }
+
+                                //     // Check availability based on the updated requested quantity
+                                //     checkAvailability(item.id, item.productSize, item.productColor, requestedQuantity, (isAvailable, availableQty) => {
+                                //         if (isAvailable) {
+                                //             // If the item is available and stock is sufficient, update the cart
+                                //             item.quantity = requestedQuantity; // Update quantity based on the requested quantity
+                                //             cart[index] = item;
+
+                                //             // Update local storage
+                                //             localStorage.setItem("cart", JSON.stringify(cart));
+
+                                //             // Update UI
+                                //             const quantitySpan = document.querySelector(`#qty-${item.id}`);
+                                //             const priceSpan = document.querySelector(`#price-${item.id}`);
+                                //             quantitySpan.textContent = `Qty: ${item.quantity}`;
+                                //             priceSpan.textContent = `${(parseFloat(item.price.replace(" EGP", "")) * item.quantity)} EGP`;
+
+                                //             // Refresh total amount
+                                //             updateTotalAmount();
+                                //             updateFreeShippingWidget();
+                                //             updatecartitemscount();
+                                //             resetPromoCode();
+                                //             preloader.classList.add("hidden");
+                                //             updateCartCount();
+                                //         }
+                                //     });
+                                //     updatecartitemscount();
+
+                                // }
+                                function updateQuantity(index, increment) {
+                                    const item = cart[index];
+                                    const requestedQuantity = item.quantity + increment;
+                                    const preloader = document.getElementById("cart-items-preloader");
+                                    const cartItems = document.getElementById("cart-items");
+
+                                    // Visual feedback
+                                    if (cartItems) cartItems.classList.add("updating");
+                                    if (preloader) preloader.classList.remove("hidden");
+
+                                    // Minimum quantity check
+                                    if (requestedQuantity < 1) {
+                                        preloader.classList.add("hidden");
+                                        return;
+                                    }
+
+                                    checkAvailability(item.id, item.productSize, item.productColor, requestedQuantity, (isAvailable, availableQty) => {
+                                        if (isAvailable) {
+                                            // Store original cut per unit if not already stored
+                                            if (!item.originalCut) {
+                                                item.originalCut = item.cut / item.quantity;
+                                            }
+
+                                            // Update both quantity and cut
+                                            item.quantity = requestedQuantity;
+                                            item.cut = item.originalCut * requestedQuantity;
+                                            cart[index] = item;
+
+                                            // Update storage and UI
+                                            localStorage.setItem("cart", JSON.stringify(cart));
+
+                                            const quantitySpan = document.querySelector(`#qty-${item.id}`);
+                                            const priceSpan = document.querySelector(`#price-${item.id}`);
+                                            const cutSpan = document.querySelector(`#cut-${item.id}`); // Assuming you have this element
+
+                                            if (quantitySpan) quantitySpan.textContent = `Qty: ${item.quantity}`;
+                                            if (priceSpan) priceSpan.textContent = `${(parseFloat(item.price.replace(" EGP", "")) * item.quantity)} EGP`;
+                                            if (cutSpan) cutSpan.textContent = `${item.cut.toFixed(2)} EGP`; // Format cut value
+
+                                            // Update all relevant components
+                                            updateTotalAmount();
+                                            updateFreeShippingWidget();
+                                            updatecartitemscount();
+                                            resetPromoCode();
+                                            updateCartCount();
+                                        }
+                                        preloader.classList.add("hidden");
+                                    });
+                                    updatecartitemscount();
+                                }
+
+                                // Helper function to update local storage
+                                function updateLocalDbItemQuantity(itemId, newQuantity) {
+                                    const updatedCart = cart.map(item => {
+                                        if (item.id === itemId) {
+                                            // Preserve original cut per unit
+                                            const originalCut = item.originalCut || (item.cut / item.quantity);
+                                            return {
+                                                ...item,
+                                                quantity: Math.min(item.quantity, newQuantity),
+                                                cut: originalCut * Math.min(item.quantity, newQuantity)
+                                            };
+                                        }
+                                        return item;
+                                    });
+
+                                    localStorage.setItem("cart", JSON.stringify(updatedCart));
+                                    cart = updatedCart; // Update in-memory cart
+                                }
+                                // Function to update item quantity in local storage
+                                function updateLocalDbItemQuantity(itemId, newQuantity) {
+                                    // Find the item in local cart by id and update it
+
+                                    const itemIndex = cart.findIndex(item => item.id === itemId);
+                                    if (itemIndex !== -1) {
+                                        // Check if the new quantity is less than the current quantity
+                                        if (newQuantity < cart[itemIndex].quantity) {
+                                            // Update the quantity to the new allowed quantity
+                                            cart[itemIndex].quantity = newQuantity;
+                                        }
+
+                                        // Update the cart in local storage
+                                        localStorage.setItem("cart", JSON.stringify(cart));
+
+                                        // Optionally, update the UI immediately
+                                        const quantitySpan = document.querySelector(`#qty-${itemId}`);
+                                        const priceSpan = document.querySelector(`#price-${itemId}`);
+                                        if (quantitySpan) {
+                                            quantitySpan.textContent = `Qty: ${cart[itemIndex].quantity}`;
+                                        }
+                                        if (priceSpan) {
+                                            priceSpan.textContent = `${(parseFloat(cart[itemIndex].price.replace(" EGP", "")) * cart[itemIndex].quantity)} EGP`;
+                                        }
+                                    }
+                                }
+
+                                function updateTotalAmount() {
+                                    const FREE_SHIPPING_THRESHOLD = parseInt(freeshipping);
+                                    // Calculate total amount from cart array
+                                    totalAmount = cart.reduce((acc, item) => {
+                                        const itemPrice = parseFloat(item.price.replace(" EGP", "")) || 0;
+                                        return acc + itemPrice * item.quantity;
+                                    }, 0);
+
+                                    // Determine shipping status
+                                    const hasFreeShipping = totalAmount >= FREE_SHIPPING_THRESHOLD;
+                                    const shippingFee = hasFreeShipping ? 0 : maxshipping;
+                                    const totalPrice = totalAmount + shippingFee;
+
+                                    // Update cart total display
+                                    const cartTotalDiv = document.getElementById("cart-total");
+                                    if (cartTotalDiv) {
+                                        cartTotalDiv.innerText = `${totalAmount} EGP`;
+                                    }
+
+                                    // Update shipping fees display
+                                    const shippingFeesTotal = document.getElementById("shipping-fees-total");
+                                    const shippingFees = document.getElementById("shipping-fees");
+                                    if (shippingFeesTotal && shippingFees) {
+                                        if (hasFreeShipping) {
+                                            shippingFeesTotal.classList.remove("hidden");
+                                            shippingFeesTotal.innerText = "Free Shipping";
+                                            shippingFees.classList.add("hidden");
+                                        } else {
+                                            shippingFeesTotal.classList.add("hidden");
+                                            shippingFees.classList.remove("hidden");
+                                            shippingFees.innerText = `${shippingFee} EGP`;
+                                        }
+                                    }
+
+                                    // Update total price display
+                                    const totalPriceElements = document.querySelectorAll("#total-price");
+                                    totalPriceElements.forEach(el => {
+                                        el.innerText = `${totalPrice} EGP`;
+                                    });
+
+                                    // Update hidden total cart amount (for other functions)
+                                    const totalAmountDiv = document.getElementById("total-cart-amount");
+                                    if (totalAmountDiv) {
+                                        totalAmountDiv.innerText = `Total: ${totalAmount} EGP`;
+                                    }
+
+                                    // Return values in case other functions need them
+                                    return {
+                                        subtotal: totalAmount,
+                                        shipping: shippingFee,
+                                        total: totalPrice,
+                                        hasFreeShipping: hasFreeShipping
+                                    };
+                                }
+                                // Populate cart items
+                                // if (cart.length > 0) {
+                                //     const preloader = document.getElementById("cart-items-preloader");
+                                //     cart.forEach((item, index) => {
+                                //         const listItem = document.createElement("li");
+
+                                //         // Item details
+                                //         const itemDetailsDiv = document.createElement("div");
+                                //         itemDetailsDiv.classList.add("flex", "center", "align-items", "cart-item-sm");
+
+                                //         // Image
+                                //         const imageDiv = document.createElement("div");
+                                //         const itemImage = document.createElement("img");
+                                //         itemImage.src = item.photourl;
+                                //         itemImage.classList.add("pointer", "image-cart-sm");
+                                //         itemImage.onclick = () => productDetails(item.id);
+                                //         imageDiv.appendChild(itemImage);
+                                //         itemDetailsDiv.appendChild(imageDiv);
+
+                                //         // Text
+                                //         const textDiv = document.createElement("div");
+                                //         textDiv.classList.add("Product-record");
+                                //         textDiv.innerHTML = `
+                                //                                                         <h5 class="pointer" onclick="brand('${item.brand}')">${item.brand}</h5>
+                                //                                                         <p class="cart-font-smaller">${item.title}</p>
+                                //                                                         <p>Size: ${item.productSize}</p>
+                                //                                                         <p>Color: ${item.productColor}</p>
+                                //                                                         <p id="price-${item.id}">${(parseFloat(item.price.replace(" EGP", "")) * item.quantity)} EGP</p>
+                                //                                                         <p id="qty-${item.id}">Qty: ${item.quantity}</p>
+                                //                                                     `;
+                                //         itemDetailsDiv.appendChild(textDiv);
+
+                                //         // Controls Div to hold Increment, Decrement, and Delete buttons
+                                //         const controlsDiv = document.createElement("div");
+                                //         controlsDiv.classList.add("manage-cart-item");
+                                //         controlsDiv.style.display = "flex";
+                                //         controlsDiv.style.gap = "10px"; // Add spacing between buttons
+                                //         controlsDiv.style.alignItems = "center"; // Align buttons vertically
+                                //         controlsDiv.style.justifyContent = "center"; // Center the buttons in the div
+
+                                //         // Increment Button
+                                //         const incrementBtn = document.createElement("i");
+                                //         incrementBtn.className = "bi-plus-circle i-cart";
+                                //         incrementBtn.style.cursor = "pointer";
+                                //         incrementBtn.onclick = () => updateQuantity(index, 1); // Increment quantity
+
+                                //         // Decrement Button
+                                //         const decrementBtn = document.createElement("i");
+                                //         decrementBtn.className = "bi-dash-circle i-cart";
+                                //         decrementBtn.style.cursor = "pointer";
+                                //         decrementBtn.onclick = () => updateQuantity(index, -1); // Decrement quantity
+
+                                //         // Delete Button
+                                //         const deleteIcon = document.createElement("i");
+                                //         deleteIcon.className = "bi-bag-dash i-cart";
+                                //         deleteIcon.style.cursor = "pointer";
+                                //         deleteIcon.onclick = () => {
+                                //             cart.splice(index, 1);
+                                //             localStorage.setItem("cart", JSON.stringify(cart));
+                                //             listItem.remove();
+                                //             updateTotalAmount();
+                                //             updateFreeShippingWidget();
+                                //             updatecartitemscount();
+                                //             preloader.classList.remove("hidden");
+                                //             checkCartState(cart);
+                                //         };
+
+                                //         // Append all buttons to controlsDiv
+                                //         controlsDiv.appendChild(decrementBtn);
+                                //         controlsDiv.appendChild(incrementBtn);
+                                //         controlsDiv.appendChild(deleteIcon);
+
+                                //         // Append controlsDiv to itemDetailsDiv
+                                //         itemDetailsDiv.appendChild(controlsDiv);
+
+                                //         // Append itemDetailsDiv to listItem
+                                //         listItem.appendChild(itemDetailsDiv);
+
+                                //         // Append listItem to cart list
+                                //         cartList.appendChild(listItem);
+
+                                //     });
+
+                                //     // Total Amount
+                                //     const totalAmountH5 = document.getElementById("total-cart-amount");
+                                //     totalAmountH5.textContent = `Cart Total : ${totalAmount} EGP`;
+
+                                //     // Initial total amount calculation
+                                //     updateTotalAmount();
+
+                                // } else {
+                                //     checkCartState(cart)
+                                // }
+                                if (cart.length > 0) {
+                                    const preloader = document.getElementById("cart-items-preloader");
+                                    cart.forEach((item, index) => {
+                                        const listItem = document.createElement("li");
+
+                                        // Item details
+                                        const itemDetailsDiv = document.createElement("div");
+                                        itemDetailsDiv.classList.add("flex", "center", "align-items", "cart-item-sm");
+
+                                        // Image
+                                        const imageDiv = document.createElement("div");
+                                        const itemImage = document.createElement("img");
+                                        itemImage.src = item.photourl;
+                                        itemImage.classList.add("pointer", "image-cart-sm");
+                                        itemImage.onclick = () => productDetails(item.id);
+                                        imageDiv.appendChild(itemImage);
+                                        itemDetailsDiv.appendChild(imageDiv);
+
+                                        // Text
+                                        const textDiv = document.createElement("div");
+                                        textDiv.classList.add("Product-record");
+                                        textDiv.innerHTML = `
+            <h5 class="pointer" onclick="brand('${item.brand}')">${item.brand}</h5>
+            <p class="cart-font-smaller">${item.title}</p>
+            <p>Size: ${item.productSize}</p>
+            <p>Color: ${item.productColor}</p>
+            <p id="price-${item.id}">${(parseFloat(item.price.replace(" EGP", "")) * item.quantity)} EGP</p>
+            <p id="qty-${item.id}">Qty: ${item.quantity}</p>
+        `;
+                                        itemDetailsDiv.appendChild(textDiv);
+
+                                        // Controls Div
+                                        const controlsDiv = document.createElement("div");
+                                        controlsDiv.classList.add("manage-cart-item");
+                                        controlsDiv.style.display = "flex";
+                                        controlsDiv.style.gap = "10px";
+                                        controlsDiv.style.alignItems = "center";
+                                        controlsDiv.style.justifyContent = "center";
+
+                                        // Increment Button
+                                        const incrementBtn = document.createElement("i");
+                                        incrementBtn.className = "bi-plus-circle i-cart";
+                                        incrementBtn.style.cursor = "pointer";
+                                        incrementBtn.onclick = () => updateQuantity(index, 1);
+
+                                        // Decrement Button
+                                        const decrementBtn = document.createElement("i");
+                                        decrementBtn.className = "bi-dash-circle i-cart";
+                                        decrementBtn.style.cursor = "pointer";
+                                        decrementBtn.onclick = () => updateQuantity(index, -1);
+
+                                        // Delete Button
+                                        const deleteIcon = document.createElement("i");
+                                        deleteIcon.className = "bi-bag-dash i-cart";
+                                        deleteIcon.style.cursor = "pointer";
+                                        deleteIcon.onclick = () => {
+                                            preloader.classList.remove("hidden"); // Show preloader before deletion
+                                            setTimeout(() => { // Small delay to allow UI to update
+                                                cart.splice(index, 1);
+                                                localStorage.setItem("cart", JSON.stringify(cart));
+                                                listItem.remove();
+                                                updateTotalAmount();
+                                                updateFreeShippingWidget();
+                                                updatecartitemscount();
+                                                resetPromoCode();
+                                                checkCartState(cart);
+                                                // Hide preloader after operations complete
+                                                preloader.classList.add("hidden");
+                                            }, 50);
+                                        };
+
+                                        // Append all buttons to controlsDiv
+                                        controlsDiv.appendChild(decrementBtn);
+                                        controlsDiv.appendChild(incrementBtn);
+                                        controlsDiv.appendChild(deleteIcon);
+
+                                        // Append controlsDiv to itemDetailsDiv
+                                        itemDetailsDiv.appendChild(controlsDiv);
+
+                                        // Append itemDetailsDiv to listItem
+                                        listItem.appendChild(itemDetailsDiv);
+
+                                        // Append listItem to cart list
+                                        cartList.appendChild(listItem);
+                                    });
+
+                                    // Total Amount
+                                    const totalAmountH5 = document.getElementById("total-cart-amount");
+                                    totalAmountH5.textContent = `Cart Total : ${totalAmount} EGP`;
+
+                                    // Initial total amount calculation
+                                    updateTotalAmount();
+
+                                    // Make sure preloader is hidden initially when items exist
+                                    preloader.classList.add("hidden");
+                                } else {
+                                    checkCartState(cart);
+                                }
+                            });
+                            function checkCartState(cart) {
+                                const cartList = document.getElementById("cart-items");
+                                const cartSectionAll = document.getElementById("cart-section-all");
+
+                                if (cart.length === 0) {
+                                    // Animate cart section out
+                                    cartSectionAll.style.setProperty('display', 'none', 'important');
+                                    cartSectionAll.style.transform = 'translateY(0)';
+                                    cartSectionAll.style.transition = 'all 0.4s ease';
+                                    cartSectionAll.style.opacity = '0';
+                                    cartSectionAll.style.transform = 'translateY(-20px)';
+                                    resetPromoCode();
+                                    setTimeout(() => {
+                                        cartSectionAll.classList.add("hidden");
+                                        cartList.innerHTML = `
+                <div class="empty-cart">
+                    <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" 
+                         alt="Empty Cart" 
+                         class="empty-cart-img">
+                    <p class="empty-cart-text">Looks like you haven't added anything yet.</p>
+                </div>
+            `;
+
+                                        // Animate empty cart in
+                                        setTimeout(() => {
+                                            const emptyCart = cartList.querySelector('.empty-cart');
+                                            emptyCart.style.opacity = '0';
+                                            emptyCart.style.transform = 'translateY(20px)';
+                                            emptyCart.style.transition = 'all 0.5s ease';
+
+                                            // Trigger reflow
+                                            void emptyCart.offsetWidth;
+
+                                            emptyCart.style.opacity = '1';
+                                            emptyCart.style.transform = 'translateY(0)';
+                                        }, 50);
+                                    }, 400);
+                                } else {
+                                    // Ensure cart section is properly shown
+                                    cartSectionAll.classList.remove("hidden");
+                                    cartSectionAll.style.opacity = '1';
+                                    cartSectionAll.style.transform = 'translateY(0)';
+                                }
+                            }
+                        </script>
+
+                        <script src="./assets/js/submit-order.js"></script>
+
+
+
+        </section>
+
+    </div>
+
+    <div class="flex center">
+        <a href="https://matager.online" target="_blank">
+            <img src="./assets/images/powerd by matager black.svg" width="100px">
+        </a>
+    </div>
+
+
+
+    </section>
+
+
+
+    </div>
+</main>
+<div class="modal">
+    <div class="modal-content">
+
+    </div>
+</div>
+
+<a href="#top" class="go-top-btn" data-go-top="">
+    <ion-icon name="arrow-up-outline" role="img" class="md hydrated" aria-label="arrow up outline"></ion-icon>
+</a>
+<a class="scrolltocheckout">
+    <span>Scroll To Check Out</span>
+    <ion-icon name="arrow-down-outline" role="img" class="md hydrated godownicon"
+        aria-label="arrow down outline"></ion-icon>
+</a>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    function showPreloader() {
+        document.getElementById('preloader').classList.remove('hidden');
+
+
+    }
+
+    // Function to hide preloader
+    function hidePreloader() {
+        document.getElementById('preloader').classList.add('hidden');
+
+
+    }
+
+    // Fetch product details after 2 seconds
+    setTimeout(() => {
+
+        hidePreloader(); // Hide preloader after 2 seconds
+        // Fetch product details
+    }, 1000);
+    document.querySelector('.scrolltocheckout').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Scroll to whichever checkout div exists first
+        const checkoutDiv = document.getElementById('checkoutByAccount') ||
+            document.getElementById('checkoutWithoutAccount');
+
+        if (checkoutDiv) {
+            checkoutDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+</script>
+<script src="./assets/js/update-cart-amont.js"></script>
+<script src="./assets/js/route.js"></script>
+<script src="./assets/js/all.js"></script>
+<script src="./assets/js/rendering-megamenu.js"></script>
+<script src="./assets/js/rendering-search.js"></script>
+<script src="./assets/js/cart.js"></script>
+<script src="./assets/js/animation.js"></script>
+<script src="./assets/js/check-store-status.js"></script>
