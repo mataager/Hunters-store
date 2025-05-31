@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        input,
+        button {
+            margin: 10px 0;
+            display: block;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pinterest Upload Test</h1>
+
+    <label for="accessToken">Access Token:</label>
+    <input type="text" id="accessToken" placeholder="Pinterest OAuth Token" size="50">
+
+    <label for="boardId">Board ID:</label>
+    <input type="text" id="boardId" placeholder="e.g., 123456789012345678">
+
+    <label for="title">Pin Title:</label>
+    <input type="text" id="title" placeholder="My Awesome Pin">
+
+    <label for="file">Image File (JPEG/PNG, <20MB):< /label>
+            <input type="file" id="file" accept="image/jpeg,image/png">
+
+            <button id="uploadBtn">Upload to Pinterest</button>
+
+            <div id="result"></div>
+
+            <script>
+                document.getElementById("uploadBtn").addEventListener("click", async () => {
+                    const accessToken = document.getElementById("accessToken").value.trim();
+                    const boardId = document.getElementById("boardId").value.trim();
+                    const title = document.getElementById("title").value.trim();
+                    const fileInput = document.getElementById("file");
+                    const resultDiv = document.getElementById("result");
+
+                    // Reset result display
+                    resultDiv.className = "";
+                    resultDiv.textContent = "";
+
+                    // Validate inputs
+                    if (!accessToken || !boardId || !fileInput.files[0]) {
+                        resultDiv.textContent = "Please fill all fields and select a file!";
+                        resultDiv.className = "error";
+                        return;
+                    }
+
+                    try {
+                        const formData = new FormData();
+                        formData.append("file", fileInput.files[0]);
+                        formData.append("board_id", boardId);
+                        formData.append("title", title || "Uploaded via API");
+
+                        const response = await fetch("https://api.pinterest.com/v5/pins", {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${accessToken}`,
+                            },
+                            body: formData,
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(data.message || "Upload failed");
+                        }
+
+                        // Success!
+                        resultDiv.innerHTML = `
+      <strong>Success!</strong> Pin created:
+      <a href="https://pinterest.com/pin/${data.id}" target="_blank">View on Pinterest</a>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    `;
+                        resultDiv.className = "success";
+
+                    } catch (error) {
+                        resultDiv.textContent = `Error: ${error.message}`;
+                        resultDiv.className = "error";
+                        console.error("Upload failed:", error);
+                    }
+                });
+            </script>
+</body>
+
+</html>
