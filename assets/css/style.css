@@ -6077,6 +6077,7 @@ th {
 @media (max-width: 630px) {}
 
 .preloader2 {
+  border-radius: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6085,7 +6086,7 @@ th {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: #000;
   /* z-index: 100; */
 }
 
