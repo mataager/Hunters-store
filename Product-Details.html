@@ -141,9 +141,6 @@
                 <li class="navbar-item">
                     <a href="#" class="navbar-link" onclick="changeFrameSrc('index.html')">Home</a>
                 </li>
-                <li class="navbar-item">
-                    <a href="#" class="navbar-link" onclick="changeFrameSrc('Products.html')">Products</a>
-                </li>
 
                 <!-- /mega menus & brands menu/ -->
 
@@ -219,7 +216,7 @@
 </header>
 <main>
     <div class="preloader" id="preloader">
-
+        <img src="favicon.png" alt="Your Image" width="40" height="40">
         <div class="loader"></div>
     </div>
 
@@ -255,15 +252,17 @@
                                 <h2 id="productTitle" class="m-5 ml-auto mb-10 ml-10"></h2>
                                 <!-- <h5 id="hints" class="m-5 ml-auto mb-10 ml-10 hints"></h5> -->
                                 <div id="hints-container"></div>
+                                <div class="prices-area">
+                                    <p id="preprice" class="m-5 mb-10"></p>
+                                    <p id="productPrice" class="m-5 mb-10"></p>
+                                </div>
 
-                                <p id="preprice" class="m-5 mb-10"></p>
-                                <p id="productPrice" class="m-5 mb-10"></p>
 
                                 <div class="size m-5 mb-10">
                                     <label class="m-5 flex pb-7 hidden" for="product-Size">
                                         Size:<p id="product-Size"> </p>
                                     </label>
-                                    <div class="rolling-container rolling-animation" id="size-hint-text">
+                                    <div class="rolling-container rolling-animation hidden" id="size-hint-text">
 
                                     </div>
 
@@ -283,21 +282,23 @@
                                     <div id="color-hint-text"
                                         style="display: none; font-size: 16px; color: #333; margin-top: 10px;">
                                     </div>
-                                    <div class="color-options m-5 flex-wrap width-80 mb-10">
+                                    <div class="color-options colors-circels-area m-5 flex-wrap width-80 mb-10">
                                     </div>
-                                    <label class="m-5 flex align-items pb-7 hidden" for="product-color">Color:<p
-                                            id="product-color">
-                                        <div id="hint" class="hint-text"></div>
-                                        </p>
+                                    <label class="m-5 flex align-items pb-7 " for="product-color">
+                                        Color:
+                                        <p id="product-color"></p> <!-- Just the color name -->
+                                        <p id="product-selected-color"></p> <!-- Just the color name -->
+                                        <div id="hint" class="hint-text hidden"></div>
                                     </label>
+
                                     <h5 id="stockContainer" class="mb-10 m-5 flex pl-0 hidden">
                                         <p class="stockMessage-p" id="stockMessage"></p>
                                     </h5>
 
                                 </div>
-                                <div class="" id="buybuttonsarea">
+                                <div class="animate-on-scroll-auto" id="buybuttonsarea">
                                     <div class="m-5 mb-10 flex">
-                                        <div id="BuyNowButton" class="Buyitnow">Buy Now
+                                        <div id="BuyNowButton" class="product-details-Buyitnow ">Buy Now
                                             <i class="bi bi-lightning"></i>
                                         </div>
                                     </div>
@@ -321,23 +322,23 @@
                                 </div>
                                 <div id="details-section" class="m-5 mb-10 detailscollapsible hidden">
                                     <div class="flex align-items mb-5">
-                                        <h5 class="m-5 flex gap-5">SKU:
-                                        </h5>
+                                        <p class="m-5 flex gap-5">SKU:
+                                        </p>
                                         <p class="pointer" id="productID" onclick="copyToClipboard()">
                                         </p>
                                     </div>
                                     <div class="flex align-items mb-5">
-                                        <h5 class="m-5 flex">Category :</h5>
+                                        <p class="m-5 flex">Category :</p>
                                         <p class="" id="category"></p>
                                     </div>
 
 
                                     <div class="flex align-items mb-5">
-                                        <h5 class="m-5 flex">piece :</h5>
+                                        <p class="m-5 flex">piece :</p>
                                         <p class="" id="piece"></p>
                                     </div>
                                     <div class="mb-5">
-                                        <h5 class="m-5 flex mt-10">Details:</h5>
+                                        <p class="m-5 flex mt-10">Details:</p>
                                         <p class="m-5 line-height-30" id="product-details"></p>
                                     </div>
 
@@ -426,7 +427,7 @@
                                         const brandName = document.getElementById("BrandName").innerText;
                                         const productPrice = document.getElementById("productPrice").innerText;
                                         const productSize = document.getElementById("product-Size").innerText;
-                                        const productColor = document.getElementById("product-color").innerText;
+                                        const productColor = document.getElementById("product-selected-color").innerText;
                                         const productID = document.getElementById("productID").innerText;
                                         const matagerCut = parseInt(
                                             document.getElementById("BuyNowButton").getAttribute("matagerCut")
@@ -518,7 +519,7 @@
         </section>
 
         <section>
-            <div class="related-products-section animate-on-scroll" id="related-products-section">
+            <div class="related-products-section " id="related-products-section">
                 <h2 class="flex align-items m-x-20 related-section-title">
                     <span class="text">Related Products</span>
                     <span class="related-line"></span>
@@ -1144,13 +1145,6 @@
 
     fetchProducts(key);
 
-    // function SizeRef() {
-    //     const colorOptions = document.getElementById('product-color');
-    //     if (colorOptions) {
-    //         colorOptions.innerHTML = '';
-    //     }
-    // }
-
     function updateProductImages(colorName) {
         showImagePreloader(); // Show loader at start
         const size = document.getElementById('product-Size').innerText;
@@ -1199,11 +1193,6 @@
                 console.error("Failed to copy:", err);
             });
     }
-
-
-
-
-
     // Also call checkSelection when the page loads in case there are default selections
     document.addEventListener('DOMContentLoaded', checkSelection);
     async function checkSelection() {
@@ -1284,82 +1273,6 @@
             }
         }
     }
-    // function SizeRef(selectedElement) {
-    //     // Get all the size-radio elements
-    //     const sizeElements = document.querySelectorAll('.size-radio');
-
-    //     // Loop through each size and reset the background and text color
-    //     sizeElements.forEach(function (element) {
-    //         element.style.backgroundColor = ''; // Reset background color
-    //         element.style.color = ''; // Reset text color
-    //     });
-
-    //     // Set the background color and text color of the clicked element
-    //     selectedElement.style.backgroundColor = '#333';
-    //     selectedElement.style.color = 'white';
-
-
-    //     // Reset the text content of the color text element
-    //     const productColorElement = document.getElementById('product-color');
-    //     if (productColorElement) {
-    //         productColorElement.innerText = ''; // Set the content to be empty
-    //     }
-
-    //     // Show the hint text asking the user to select a color
-    //     const hintTextElement = document.getElementById('color-hint-text');
-    //     if (hintTextElement) {
-    //         // Set the full hint text immediately
-    //         hintTextElement.innerHTML = 'Must choose a color <i class="bi bi-arrow-down"></i>';
-
-    //         // Make the text visible and add animation class
-    //         hintTextElement.style.display = 'block';
-    //         hintTextElement.classList.add('rolling-animation');
-
-    //     }
-
-    // }
-
-    // async function ColorRef(selectedElement) {
-    //     // Get quantity from selected color
-    //     const qty = parseInt(selectedElement.getAttribute('color-qty')) || 0;
-
-    //     // Update stock status display
-    //     await checkStockStatus(qty);
-
-    //     // Update selected color display
-    //     const productColorElement = document.getElementById('product-color');
-    //     if (productColorElement) {
-    //         productColorElement.innerText = selectedElement.getAttribute('color-name') || '';
-    //     }
-
-    //     // Check and toggle purchase buttons - only enable if qty > 0
-    //     checkAndToggleButton("product-Size", "product-color", "addToCartButton", "BuyNowButton", qty);
-
-    //     // Set quantity data on Buy Now button
-    //     const BuyNowButton = document.getElementById('BuyNowButton');
-    //     if (BuyNowButton) {
-    //         BuyNowButton.setAttribute('data-qty', qty);
-    //     }
-
-    //     // Reset all color option borders
-    //     const colorElements = document.querySelectorAll('.color-option');
-    //     colorElements.forEach(element => {
-    //         element.style.border = '';
-    //         element.style.borderBottom = '';
-    //     });
-
-    //     // Highlight selected color
-    //     selectedElement.style.border = '2px solid #c1c1c1';
-    //     selectedElement.style.borderBottom = '5px solid #c1c1c1';
-
-    //     // Hide color hint text if exists
-    //     const hintTextElement = document.getElementById('color-hint-text');
-    //     if (hintTextElement) {
-    //         hintTextElement.style.display = 'none';
-    //         hintTextElement.innerText = '';
-    //         hintTextElement.classList.remove('rolling-animation');
-    //     }
-    // }
     function SizeRef(selectedElement) {
         const sizeElements = document.querySelectorAll('.size-radio');
         sizeElements.forEach(element => {
@@ -1382,21 +1295,64 @@
     }
 
     // Updated ColorRef function
+    // async function ColorRef(selectedElement) {
+    //     // Reset all color option borders
+    //     const colorElements = document.querySelectorAll('.color-option');
+    //     colorElements.forEach(element => {
+    //         element.style.border = '';
+    //         element.style.borderBottom = '';
+    //         if (element.parentElement.classList.contains('colorOptionwrapper')) {
+
+    //             element.parentElement.classList.remove("colorOptionwrapper-selected");
+    //         }
+    //     });
+
+    //     // Add border bottom to the parent wrapper
+    //     if (selectedElement.parentElement.classList.contains('colorOptionwrapper')) {
+    //         selectedElement.parentElement.classList.add("colorOptionwrapper-selected");
+    //     }
+
+    //     // Highlight selected color
+    //     selectedElement.style.border = '0px solid #c1c1c6';
+    //     selectedElement.style.borderBottom = '0px solid #c1c1c1';
+
+    //     // Call the unified check
+    //     await checkSelection();
+    // }
+
+
     async function ColorRef(selectedElement) {
-        // Reset all color option borders
+        // 1. Reset all color options
         const colorElements = document.querySelectorAll('.color-option');
         colorElements.forEach(element => {
             element.style.border = '';
             element.style.borderBottom = '';
+            element.parentElement.classList.remove("colorOptionwrapper-selected");
         });
 
-        // Highlight selected color
-        selectedElement.style.border = '2px solid #c1c1c1';
-        selectedElement.style.borderBottom = '5px solid #c1c1c1';
+        // 2. Highlight selected color
+        selectedElement.style.border = '0px solid #c1c1c6';
+        selectedElement.style.borderBottom = '0px solid #c1c1c1';
+        selectedElement.parentElement.classList.add("colorOptionwrapper-selected");
 
-        // Call the unified check
+        // 3. Update color name display
+        const colorName = selectedElement.getAttribute('data-color-name');
+        const productColorElement = document.getElementById('product-selected-color');
+
+
+        if (colorName && productColorElement) {
+            // Format the color name (capitalize first letter)
+            const formattedColorName = colorName;
+
+            // Set the color name in the main element
+            productColorElement.textContent = formattedColorName;
+
+        }
+
+        // 4. Call the unified check
         await checkSelection();
     }
+
     function showColorHint() {
         const hintTextElement = document.getElementById('color-hint-text');
         if (hintTextElement) {
