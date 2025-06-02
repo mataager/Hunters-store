@@ -8274,3 +8274,23 @@ body.swal2-shown {
   background-color: #000 !important;
   color: white !important;
 }
+.product-details-Buyitnow {
+    display: flex;
+    padding: 20px;
+    opacity: 1;
+    width: -webkit-fill-available;
+    justify-content: center;
+    border: 1px solid #c14907;
+    font-size: small;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 5px;
+    color: rgb(255 255 255);
+    background: #000;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}  .product-details-Buyitnow:hover {
+   background-color: #f0f0f0;
+    color: black;
+}
