@@ -20,7 +20,7 @@ const specialshipping = 85;
 const vanishedstock = false;
 const outofstock = true;
 const flippedimages = false;
-const autopricehandle = true;
+const autopricehandle = false;
 
 // guest checkout
 const GuestEmail = "huntersstoreguest@gmail.com";
