@@ -29,6 +29,6 @@ const pannerurl =
   "https://ms.aimpoint.com/categories/header-category-hunting__09615_category_category.jpg?width=1280&height=1280&format=webp&quality=80";
 //
 const newarrivalurl =
-  "https://media.istockphoto.com/id/173597418/photo/two-hunters-dragging-deer-v.jpg?s=612x612&w=0&k=20&c=vsAZ11xh1X2fP8N33xwtTkJIHsySeqSKeKHvEtsVAnQ=";
+  "https://img.freepik.com/free-photo/sunrise-fog-forest_23-2151951176.jpg?ga=GA1.1.430425935.1743739207&semt=ais_items_boosted&w=740";
 const saleurl =
-  "https://www.fws.gov/sites/default/files/styles/scale_width_480/public/2021-09/squirrel%20hunt%202012%20%282%29.jpg?itok=M-3D6-OP";
+  "https://img.freepik.com/free-photo/beautiful-forest-with-tall-trees_198523-57.jpg?ga=GA1.1.430425935.1743739207&semt=ais_items_boosted&w=740";
